@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && rb.bodyType == RigidbodyType2D.Kinematic)
+        if (Input.GetMouseButtonDown(0) && rb.bodyType == RigidbodyType2D.Dynamic)
         {
             target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             target.z = transform.position.z;

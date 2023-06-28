@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && rb.bodyType == RigidbodyType2D.Kinematic)
+        if (Input.GetMouseButtonDown(0) && rb.bodyType == RigidbodyType2D.Dynamic)
         {
             target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             target.z = transform.position.z;
@@ -73,16 +73,18 @@ public class Movement : MonoBehaviour
     }
 
     // Player Collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("collisions <3");
         // Collides with plastic bag or plastic bottle or seaweed
         if (collision.gameObject.CompareTag("Plastic") || collision.gameObject.CompareTag("TempSeaweed"))
         {
+            Debug.Log("YOOP SLOW DOWN");
             Slow();
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         // Stops colliding with plastic bag or plastic bottle or seaweed
         if (collision.gameObject.CompareTag("Plastic") || collision.gameObject.CompareTag("TempSeaweed"))
@@ -95,7 +97,7 @@ public class Movement : MonoBehaviour
     private void Slow()
     {
         moveSpeed = 4f;
-        
+
         if (currentSpeed > 0)
         {
             currentSpeed /= 2;
